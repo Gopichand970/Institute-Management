@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Placements Page</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url(https://wallpapercave.com/wp/wp8489424.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position:center ;
+        color: white;
+    }
+    .container {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px white;
+    }
+    h2 {
+        text-align: center;
+    }
+    .placement {
+        border-bottom: 1px solid #ccc;
+        padding: 10px 0;
+    }
+    .filter {
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Job Placements</h2>
+    
+    <div class="filter">
+        <label for="filterCategory">Filter by Category:</label>
+        <select id="filterCategory">
+            <option value="all">All</option>
+            <option value="software">Software Development</option>
+            <option value="marketing">Marketing</option>
+            <option value="finance">Finance</option>
+            <!-- Add more options as needed -->
+        </select>
+    </div>
+    
+    <div id="placementsList">
+        <!-- Placements will be dynamically added here -->
+    </div>
+</div>
+
+<script>
+    // Sample data for job placements
+    var placements = [
+        { title: "Software Engineer", category: "software", company: "Tech Corp", location: "San Francisco, CA" },
+        { title: "Marketing Specialist", category: "marketing", company: "Ad Agency Inc.", location: "New York, NY" },
+        { title: "Financial Analyst", category: "finance", company: "FinanceCo", location: "Chicago, IL" },
+        // Add more placements as needed
+    ];
+    
+    // Function to display placements based on selected category
+    function displayPlacements(category) {
+        var placementsList = document.getElementById("placementsList");
+        placementsList.innerHTML = "";
+        
+        placements.forEach(function(placement) {
+            if (category === "all" || placement.category === category) {
+                var placementHTML = '<div class="placement">';
+                placementHTML += '<h3>' + placement.title + '</h3>';
+                placementHTML += '<p><strong>Company:</strong> ' + placement.company + '</p>';
+                placementHTML += '<p><strong>Location:</strong> ' + placement.location + '</p>';
+                placementHTML += '</div>';
+                
+                placementsList.innerHTML += placementHTML;
+            }
+        });
+    }
+    
+    // Display all placements initially
+    displayPlacements("all");
+    
+    // Event listener for filter change
+    document.getElementById("filterCategory").addEventListener("change", function() {
+        var selectedCategory = this.value;
+        displayPlacements(selectedCategory);
+    });
+</script>
+</body>
+</html>

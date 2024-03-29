@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fee Management</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-image: url(https://media.istockphoto.com/id/936987292/photo/man-counting-college-savings-fund-tuition-fee-or-student-loan-with-calculator-education-price.jpg?s=612x612&w=0&k=20&c=LlRsKC_UkwdIXVdXRyidpsvyt62bqGwsFS5AXpw4is0=);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position:center ;
+    }
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px white
+    }
+    h2 {
+        text-align: center;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    th, td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ccc;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+    }
+    .form-group input[type="text"] {
+        width: calc(100% - 20px);
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .form-group input[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .form-group input[type="submit"]:hover {
+        background-color: #45a049;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h2>Fee Management</h2>
+    
+    <table>
+        <tr>
+            <th>Student Name</th>
+            <th>Roll Number</th>
+            <th>Fee Amount</th>
+            <th>Status</th>
+        </tr>
+        <!-- Add more rows as needed -->
+    </table>
+    
+    <h3>Fees Transactions</h3>
+    <form id="feeForm">
+        <div class="form-group">
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" name="studentName" required>
+        </div>
+        <div class="form-group">
+            <label for="rollNumber">Roll Number:</label>
+            <input type="text" id="rollNumber" name="rollNumber" required>
+        </div>
+        <div class="form-group">
+            <label for="feeAmount">Fee Amount:</label>
+            <input type="text" id="feeAmount" name="feeAmount" required>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Add Fee">
+        </div>
+    </form>
+</div>
+
+<script>
+    // Function to display fees
+    function displayFees() {
+        var tableBody = document.querySelector("table tbody");
+        tableBody.innerHTML = "";
+        
+        fees.forEach(function(fee) {
+            var row = "<tr>";
+            row += "<td>" + fee.studentName + "</td>";
+            row += "<td>" + fee.rollNumber + "</td>";
+            row += "<td>" + fee.feeAmount + "</td>";
+            row += "<td>" + fee.status + "</td>";
+            row += "</tr>";
+            
+            tableBody.innerHTML += row;
+        });
+    }
+    
+    // Display fees initially
+    displayFees();
+    
+    // Event listener for adding new fee
+    document.getElementById("feeForm").addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent form submission
+        
+        // Retrieve form data
+        var studentName = document.getElementById("studentName").value;
+        var rollNumber = document.getElementById("rollNumber").value;
+        var feeAmount = document.getElementById("feeAmount").value;
+        
+        // Add new fee to the fees array
+        fees.push({
+            studentName: studentName,
+            rollNumber: rollNumber,
+            feeAmount: feeAmount,
+            status: "Not Paid" // Assuming newly added fees are not paid initially
+        });
+        
+        // Update the fees table
+        displayFees();
+        
+        // Reset the form
+        document.getElementById("feeForm").reset();
+    });
+</script>
+</body>
+</html>
